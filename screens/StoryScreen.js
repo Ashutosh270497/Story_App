@@ -122,7 +122,7 @@ export default class StoryScreen extends Component {
                     : styles.appTitleText
                 }
               >
-                Story Telling App
+                Storytelling App
               </Text>
             </View>
           </View>
