@@ -7,7 +7,7 @@ import {
   Platform,
   StatusBar,
   Image,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -18,14 +18,14 @@ import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 
 let customFonts = {
-  "Bubblegum-Sans": require("../assets/fonts/BubblegumSans-Regular.ttf")
+  "Bubblegum-Sans": require("../assets/fonts/BubblegumSans-Regular.ttf"),
 };
 
 export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fontsLoaded: false
+      fontsLoaded: false,
     };
   }
 
@@ -44,7 +44,7 @@ export default class LoginScreen extends Component {
       for (var i = 0; i < providerData.length; i++) {
         if (
           providerData[i].providerId ===
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
           providerData[i].uid === googleUser.getBasicProfile().getId()
         ) {
           // We don't need to reauth the Firebase connection.
@@ -55,9 +55,9 @@ export default class LoginScreen extends Component {
     return false;
   };
 
-  onSignIn = googleUser => {
+  onSignIn = (googleUser) => {
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-    var unsubscribe = firebase.auth().onAuthStateChanged(firebaseUser => {
+    var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
       unsubscribe();
       // Check if we are already signed-in Firebase with the correct user.
       if (!this.isUserEqual(googleUser, firebaseUser)) {
@@ -82,12 +82,12 @@ export default class LoginScreen extends Component {
                   locale: result.additionalUserInfo.profile.locale,
                   first_name: result.additionalUserInfo.profile.given_name,
                   last_name: result.additionalUserInfo.profile.family_name,
-                  current_theme: "dark"
+                  current_theme: "dark",
                 })
-                .then(function (snapshot) { });
+                .then(function (snapshot) {});
             }
           })
-          .catch(error => {
+          .catch((error) => {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -108,10 +108,10 @@ export default class LoginScreen extends Component {
       const result = await Google.logInAsync({
         behaviour: "web",
         androidClientId:
-          "72696421845-lqe44rrjuiggsegp1uv4gklv34tvl3gc.apps.googleusercontent.com",
+          "681240354678-roamcjjk0coqpt7dtg38gqshjahfiv8u.apps.googleusercontent.com",
         iosClientId:
-          "72696421845-osrvc36bjie4264j4c0812sp5a2egqhj.apps.googleusercontent.com",
-        scopes: ["profile", "email"]
+          "681240354678-6oesgvija6a2g2p3d98onpm50r27k0gq.apps.googleusercontent.com",
+        scopes: ["profile", "email"],
       });
 
       if (result.type === "success") {
@@ -167,31 +167,32 @@ export default class LoginScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#15193c"
+    backgroundColor: "#15193c",
   },
   droidSafeArea: {
-    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : RFValue(35)
+    marginTop:
+      Platform.OS === "android" ? StatusBar.currentHeight : RFValue(35),
   },
   appTitle: {
     flex: 0.4,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   appIcon: {
     width: RFValue(130),
     height: RFValue(130),
-    resizeMode: "contain"
+    resizeMode: "contain",
   },
   appTitleText: {
     color: "white",
     textAlign: "center",
     fontSize: RFValue(40),
-    fontFamily: "Bubblegum-Sans"
+    fontFamily: "Bubblegum-Sans",
   },
   buttonContainer: {
     flex: 0.3,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   button: {
     width: RFValue(250),
@@ -200,25 +201,25 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     borderRadius: RFValue(30),
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   googleIcon: {
     width: RFValue(30),
     height: RFValue(30),
-    resizeMode: "contain"
+    resizeMode: "contain",
   },
   googleText: {
     color: "black",
     fontSize: RFValue(20),
-    fontFamily: "Bubblegum-Sans"
+    fontFamily: "Bubblegum-Sans",
   },
   cloudContainer: {
-    flex: 0.3
+    flex: 0.3,
   },
   cloudImage: {
     position: "absolute",
     width: "100%",
     resizeMode: "contain",
-    bottom: RFValue(-5)
-  }
+    bottom: RFValue(-5),
+  },
 });
